@@ -13,10 +13,14 @@ function ajax_filter_jobs() {
     $taxonomies = ['job-category', 'job-type', 'job-location'];
     foreach ($taxonomies as $tax) {
         if (!empty($_POST[$tax])) {
+            $terms = $_POST[$tax];
+            if (!is_array($terms)) {
+                $terms = [$terms];
+            }
             $tax_query[] = [
                 'taxonomy' => $tax,
                 'field'    => 'slug',
-                'terms'    => array_map('sanitize_text_field', $_POST[$tax]),
+                'terms'    => array_map('sanitize_text_field', $terms),
             ];
         }
     }
@@ -47,9 +51,14 @@ function ajax_filter_jobs() {
             ?>
 <div class="job">
     <div class="head">
-        <?php if (has_post_thumbnail()) {
+        <?php
+    if (has_post_thumbnail()) {
         the_post_thumbnail('medium', ['class' => 'featured-image']);
-    } ?>
+    } else {
+        $fallback_url = esc_url(WPJLC_PLUGIN_URL . 'assets/media/image-placeholder.png');
+        echo '<img src="' . $fallback_url . '" class="featured-image" alt="Placeholder Image">';
+    }
+    ?>
     </div>
     <div class="body">
         <h3><a href="<?php the_permalink(); ?>" class="title">

@@ -1,5 +1,5 @@
 /* importing fonts */
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 :root {
   /* global colors */
@@ -7,24 +7,24 @@
   --secondary-color: #dce6ff;
   --text-color: #585858;
   --dark-text-color: #050315;
-  --accent-color: #2d88b5;
+  --accent-color: #154344;
   --gray-background-color: #fdfdfd;
   --whhite-background-color: #ffffff;
 
   /* global fonts */
-  --primary-font-family: "Outfit", serif;
+  --primary-font-family: "Bricolage Grotesque", sans-serif;
   --primary-font-size: 54px;
   --primary-font-weight: 700;
 
-  --secondary-font-family: "Outfit", serif;
+  --secondary-font-family: "Bricolage Grotesque", sans-serif;
   --secondary-font-size: 20px;
   --secondary-font-weight: 700;
 
-  --text-font-family: "Inter", sans-serif;
+  --text-font-family: "Open Sans", sans-serif;
   --text-font-size: 14px;
   --text-font-weight: 500;
 
-  --accent-font-family: "Inter", sans-serif;
+  --accent-font-family: "Open Sans", sans-serif;
   --accent-font-size: 14px;
   --accent-font-weight: 600;
 
@@ -38,7 +38,7 @@
 
 #jobListing {
   width: 100%;
-  max-width: initial;
+  max-width: 1280px;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -48,6 +48,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  outline: none;
 }
 
 #jobListing .row {
@@ -177,6 +178,58 @@
 }
 
 /* content */
+/* View toggle icons */
+#jobListing .view-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 15px;
+}
+
+#jobListing .view-icon {
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s;
+}
+
+#jobListing .view-icon.active {
+  color: var(--accent-color);
+}
+
+/* List view styles */
+#jobListing .jobs.list-view {
+  flex-direction: column;
+}
+#jobListing .jobs.list-view .jobs {
+  gap: 10px;
+}
+
+#jobListing .jobs.list-view .job {
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding: 10px 15px;
+  height: auto;
+}
+
+#jobListing .jobs.list-view .job img {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+}
+
+#jobListing .jobs.list-view .job .body {
+  flex: 1;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 #jobListing .content-header {
   border-bottom: var(--border);
   padding-bottom: 8px;
@@ -235,6 +288,9 @@
   overflow: hidden;
   transition: ease 0.3s;
 }
+#jobListing .jobs.list-view .job .head {
+  display: none;
+}
 #jobListing .job:hover {
   border-color: var(--accent-color);
 }
@@ -248,6 +304,10 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+}
+#jobListing .jobs.list-view .job .body {
+  flex-direction: row;
+  align-items: center;
 }
 #jobListing .job h3,
 #jobListing .job p {
@@ -286,6 +346,16 @@
   font-family: var(--accent-font-family);
   font-weight: 400;
   font-size: 14px;
+}
+#jobListing .jobs.list-view .job .specs {
+  flex-direction: row;
+  gap: 30px;
+}
+#jobListing .jobs.list-view .job .specs strong {
+  display: none;
+}
+#jobListing .jobs.list-view .job .spec {
+  width: 120px;
 }
 
 /* pagination */
@@ -412,4 +482,30 @@
   #jobListing .job {
     max-width: 100%;
   }
+}
+
+#jobListing .filter-group select.filter-select {
+  width: 100%;
+  padding: 12px 18px;
+  font-family: var(--accent-font-family);
+  font-size: var(--accent-font-size);
+  color: #6f6f6f;
+  border: var(--border);
+  border-radius: 5px;
+  background: #fff;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%236f6f6f" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+  cursor: pointer;
+}
+#jobListing .filter-group select.filter-select:hover,
+#jobListing .filter-group select.filter-select:focus {
+  border-color: var(--accent-color);
+}
+#jobListing .filter-group select.filter-select:disabled {
+  background-color: #f5f5f5;
+  color: #aaa;
+  cursor: not-allowed;
 }

@@ -3,7 +3,7 @@
 - Plugin Name: Custom Job Listing
 - Plugin URI: https://towfique-elahe.framer.website/custom-job-listing
 - Description: Extends the WP Job Openings plugin by adding custom job listing views, styles, and shortcode functionality. Enhances job board UI with modern components like Ionicons and AJAX filtering.
-- Version: 1.0.1
+- Version: 1.0.2
 - Author: Towfique Elahe
 - Author URI: https://towfique-elahe.framer.website/
 - License: GPLv2 or later
@@ -11,8 +11,8 @@
 - Text Domain: wp-job-listings-custom
 - Tested up to: 6.8
 
-### Version: 1.0.1
+### Version: 1.0.2
 
-- Updated plugin structure, organized code into folders.
-- Added ajax handler, improved filtering functionality.
+- Organized code into folders.
+- Added fallback image after checking featured image in job card.
 - Updated styles for global use.

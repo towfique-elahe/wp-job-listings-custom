@@ -3,8 +3,8 @@
 // Enqueue scripts and styles
 function wp_job_listings_custom_enqueue_assets() {
     if ( is_singular() && has_shortcode( get_post()->post_content, 'custom_job_listing' ) ) {
-        wp_enqueue_style( 'job-listing-styles', WPJLC_PLUGIN_URL . 'assets/job-listing.css' );
-        wp_enqueue_script( 'job-listing-ajax', WPJLC_PLUGIN_URL . 'assets/job-listing.js', array( 'jquery' ), null, true );
+        wp_enqueue_style( 'job-listing-styles', WPJLC_PLUGIN_URL . 'assets/css/job-listing.css' );
+        wp_enqueue_script( 'job-listing-ajax', WPJLC_PLUGIN_URL . 'assets/js/job-listing.js', array( 'jquery' ), null, true );
 
         wp_localize_script( 'job-listing-ajax', 'job_ajax_obj', array(
             'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -25,3 +25,4 @@ function wp_job_listings_custom_add_ionicons_cdn() {
         );
     }
 }
+add_action( 'wp_footer', 'wp_job_listings_custom_add_ionicons_cdn' );

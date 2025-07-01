@@ -39,15 +39,13 @@ function render_custom_job_listing() {
 
                     foreach ($filters as $key => $terms) {
                         echo '<div class="filter-group">';
-                        echo '<h4 class="filter-heading">' . esc_html($custom_headings[$key]) . '</h4>';
-                        echo '<div class="filter-items">';
+                        echo '<select name="' . esc_attr($key) . '" class="filter-select" id="' . esc_attr($key) . '">';
+                        echo '<option value="">' . esc_html('Select ' . $custom_headings[$key]) . '</option>';
                         foreach ($terms as $term) {
-                            echo '<div class="filter-item">';
-                            echo '<input type="checkbox" class="filter-checkbox" name="' . esc_attr($key) . '[]" value="' . esc_attr($term->slug) . '" id="' . esc_attr($term->slug) . '">';
-                            echo '<label for="' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</label>';
-                            echo '</div>';
+                            echo '<option value="' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</option>';
                         }
-                        echo '</div></div>';
+                        echo '</select>';
+                        echo '</div>';
                     }
                 ?>
         </div>
@@ -79,6 +77,14 @@ function render_custom_job_listing() {
                                     <option value="desc">Newest Jobs</option>
                                     <option value="asc">Oldest Jobs</option>
                                 </select>
+                            </div>
+                            <div class="view-toggle">
+                                <span class="view-icon grid active" data-view="grid">
+                                    <ion-icon name="grid-outline"></ion-icon>
+                                </span>
+                                <span class="view-icon list" data-view="list">
+                                    <ion-icon name="list-outline"></ion-icon>
+                                </span>
                             </div>
                         </div>
                     </div>

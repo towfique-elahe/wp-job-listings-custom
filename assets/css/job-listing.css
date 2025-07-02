@@ -187,7 +187,10 @@
   align-items: center;
   gap: 10px;
 }
-
+#jobListing .job-count select,
+#jobListing .sort-by select {
+  width: inherit !important;
+}
 #jobListing .view-icon {
   cursor: pointer;
   font-size: 20px;

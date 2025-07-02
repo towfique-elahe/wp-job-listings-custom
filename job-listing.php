@@ -91,7 +91,8 @@ function render_custom_job_listing() {
                 </div>
 
                 <!-- Dynamic Job Listings will be inserted here -->
-                <div id="job-results" class="jobs"></div>
+                <div id="job-results-grid" class="jobs grid-view"></div>
+                <div id="job-results-list" class="jobs list-view" style="display: none;"></div>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@ jQuery(document).ready(function ($) {
             order: $('#sort_order').val()
         };
 
-        // Gather all checked filters
+        // Gather all filters
         $('.filter-select').each(function () {
             const name = $(this).attr('name');
             const value = $(this).val();
@@ -23,19 +23,16 @@ jQuery(document).ready(function ($) {
             type: 'POST',
             data: filters,
             beforeSend: function () {
-                $('#job-results').html('<p class="jobs-msg">Loading jobs...</p>');
+                $('#job-results-grid, #job-results-list').html('<p class="jobs-msg">Loading jobs...</p>');
             },
             success: function (res) {
-                if (res.trim() === '') {
-                    $('#job-results').html('<p class="jobs-msg no-results">No jobs available.</p>');
-                } else {
-                    $('#job-results').html(res);
-                }
+                $('#job-results-grid').html(res.grid);
+                $('#job-results-list').html(res.list);
             }
         });
     }
 
-    // Trigger events
+    // Filter events
     $('#search, #jobs_per_page, #sort_order').on('change keyup', function () {
         fetchJobs();
     });
@@ -44,7 +41,7 @@ jQuery(document).ready(function ($) {
         fetchJobs();
     });
 
-    $('#job-results').on('click', '.pagination a', function (e) {
+    $('#job-results-grid, #job-results-list').on('click', '.pagination a', function (e) {
         e.preventDefault();
         let page = $(this).data('page');
         fetchJobs(page);
@@ -57,46 +54,47 @@ jQuery(document).ready(function ($) {
         fetchJobs();
     });
 
+    // View toggle
+    $('.view-icon').on('click', function () {
+        let view = $(this).data('view');
+
+        $('.view-icon').removeClass('active');
+        $(this).addClass('active');
+
+        if (view === 'list') {
+            $('#job-results-grid').hide();
+            $('#job-results-list').show();
+        } else {
+            $('#job-results-list').hide();
+            $('#job-results-grid').show();
+        }
+    });
+
+    // Mobile sidebar toggle
+    $('.mobile-filter-toggle').on('click', function () {
+        $('.custom-job-listing .sidebar').toggleClass('active');
+    });
+
+    $('.close-sidebar').on('click', function () {
+        $('.custom-job-listing .sidebar').removeClass('active');
+    });
+
+    $(document).on('click', function (e) {
+        if (
+            $('.custom-job-listing .sidebar').hasClass('active') &&
+            !$(e.target).closest('.sidebar, .mobile-filter-toggle').length
+        ) {
+            $('.custom-job-listing .sidebar').removeClass('active');
+        }
+    });
+
+    $(document).on('keydown', function (e) {
+        if (e.key === 'Escape') {
+            $('.custom-job-listing .sidebar').removeClass('active');
+        }
+    });
+
     // Initial load
     fetchJobs();
-
-  $('.mobile-filter-toggle').on('click', function () {
-    $('.custom-job-listing .sidebar').toggleClass('active');
-  });
-
-  $('.close-sidebar').on('click', function () {
-    $('.custom-job-listing .sidebar').removeClass('active');
-  });
-
-  // Optional: Close sidebar on outside click or Esc
-  $(document).on('click', function (e) {
-    if (
-      $('.custom-job-listing .sidebar').hasClass('active') &&
-      !$(e.target).closest('.sidebar, .mobile-filter-toggle').length
-    ) {
-      $('.custom-job-listing .sidebar').removeClass('active');
-    }
-  });
-
-  $(document).on('keydown', function (e) {
-    if (e.key === 'Escape') {
-      $('.custom-job-listing .sidebar').removeClass('active');
-    }
-  });
-
-  $('.view-icon').on('click', function () {
-    var view = $(this).data('view');
-
-    // Update icon active state
-    $('.view-icon').removeClass('active');
-    $(this).addClass('active');
-
-    // Toggle classes on job list
-    if (view === 'list') {
-        $('#job-results').addClass('list-view');
-    } else {
-        $('#job-results').removeClass('list-view');
-    }
-});
-
+    $('#job-results-list').hide(); // Ensure list is hidden by default
 });

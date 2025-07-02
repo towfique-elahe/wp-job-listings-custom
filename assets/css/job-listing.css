@@ -97,7 +97,7 @@
 #jobListing .sidebar-heading {
   color: var(--accent-color);
   font-family: var(--primary-font-family);
-  font-weight: 600;
+  font-weight: 600 !important;
   font-size: 18px;
   margin: 0;
 }

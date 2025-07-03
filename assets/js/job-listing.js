@@ -5,7 +5,7 @@ jQuery(document).ready(function ($) {
             nonce: job_ajax_obj.nonce,
             search: $('#search').val(),
             paged: page,
-            posts_per_page: $('#jobs_per_page').val(),
+            posts_per_page: $('#jobs_per_page').val() || job_ajax_obj.default_per_page,
             order: $('#sort_order').val()
         };
 
@@ -70,6 +70,16 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    const defaultView = job_ajax_obj.default_view || 'grid';
+    if (defaultView === 'list') {
+        $('#job-results-grid').hide();
+        $('#job-results-list').show();
+        $('.view-icon.grid').removeClass('active');
+        $('.view-icon.list').addClass('active');
+    } else {
+        $('#job-results-list').hide(); // Only hide list if default is grid
+    }
+
     // Mobile sidebar toggle
     $('.mobile-filter-toggle').on('click', function () {
         $('.custom-job-listing .sidebar').toggleClass('active');
@@ -96,5 +106,4 @@ jQuery(document).ready(function ($) {
 
     // Initial load
     fetchJobs();
-    $('#job-results-list').hide(); // Ensure list is hidden by default
 });

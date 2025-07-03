@@ -65,10 +65,18 @@ function render_custom_job_listing() {
                         <div class="row">
                             <div class="job-count">
                                 Show:
+                                <?php
+                                    $settings = get_option('wpjlc_settings');
+                                    $default_per_page = $settings['jobs_per_page'] ?? '9';
+                                    $per_page_options = [6, 9, 12, 15, 18];
+                                ?>
                                 <select id="jobs_per_page">
-                                    <option value="6">6</option>
-                                    <option value="9">9</option>
-                                    <option value="12">12</option>
+                                    <?php foreach ($per_page_options as $val): ?>
+                                    <option value="<?php echo esc_attr($val); ?>"
+                                        <?php selected($val, $default_per_page); ?>>
+                                        <?php echo esc_html($val); ?>
+                                    </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="sort-by">

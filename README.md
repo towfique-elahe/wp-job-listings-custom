@@ -11,6 +11,23 @@
 - Text Domain: wp-job-listings-custom
 - Tested up to: 6.8
 
+### Version: 1.0.1
+
+- Updated plugin structure, organized code into folders.
+- Added ajax handler, improved filtering functionality.
+- Updated styles for global use.
+
+### Version: 1.0.2
+
+- Organized code into folders.
+- Added fallback image after checking featured image in job card.
+- Updated styles for global use.
+
+### Version: 1.0.3
+
+- Updated ajax content to show different jobs container based on grid view or list view to remove transition glitch when switching between views.
+- Updated css to improve design.
+
 ### Version: 1.0.4
 
 - Added dedicated job listing settings page in wp dashboard.
